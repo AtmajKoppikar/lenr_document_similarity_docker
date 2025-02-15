@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Results</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Similar Documents</h1>
+        
+        <button class="btn btn-primary mb-4" onclick="window.history.back()">Upload new document</button>
+        
+        {% if common_results %}
+            <ul class="list-group">
+            {% for result in common_results %}
+                <li class="list-group-item">
+                    <h5 class="mb-1"><strong>Title:</strong> {{ result.title }}</h5>
+                    <!-- <p class="mb-1"><strong>Authors:</strong> {{ result.all_authors }}</p>
+                    <p class="mb-1"><strong>Year Published:</strong> {{ result.year_published }}</p>
+                    <p class="mb-1"><strong>Publisher:</strong> {{ result.publisher }}</p>
+                    <p class="mb-1"><strong>Keywords:</strong> {{ result.keywords }}</p>
+                    <p class="mb-1"><strong>Volume:</strong> {{ result.volume }}</p> -->
+                    <p class="mb-1"><strong>Abstract:</strong> {{ result.abstract }}</p>
+                    <p class="mb-1"><strong>Id:</strong> {{ result.doc_id }}.json</p>
+                    <p class="mb-1"><strong>Link:</strong> <a href="{{ result.link_path }}" target="_blank">{{ result.link_path }}</a></p>
+                    <!-- <p class="mb-1"><strong>Similarity Large:</strong> {{ result.similarity_large }}</p>
+                    <p class="mb-1"><strong>Similarity Small:</strong> {{ result.similarity_small }}</p> -->
+                    <p class="mb-1"><strong>Similarity Score:</strong> {{ result.similarity_score }}%</p>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                No common documents found between the two models.
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
