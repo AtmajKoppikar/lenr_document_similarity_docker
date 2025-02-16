@@ -1,0 +1,63 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{cite}
+
+\title{Exploring Artificial Intelligence Techniques to Research Low Energy Nuclear Reactions}
+\author{Anasse Bari, Tanya Pushkin Garg, Yvonne Wu, Sneha Singh, David Nagel}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    This study investigates AI-driven methods to analyze Low Energy Nuclear Reactions (LENR) and provide data-driven insights into this emerging field. The work focuses on embedding models, topic modeling techniques, and machine learning tools to extract prevalent themes and relationships from the LENR literature corpus.
+\end{abstract}
+
+\section{Introduction}
+    \input{sections/introduction.tex}
+
+\section{Background and Related Work}
+    \input{sections/background.tex}
+
+\section{Dataset}
+    \input{sections/dataset.tex}
+
+\section{Data Preparation}
+    \input{sections/data_preparation.tex}
+
+\section{Topic Modeling}
+    \subsection{Topic Modeling Algorithms}
+        \subsubsection{Latent Dirichlet Allocation (LDA)}
+            \input{sections/lda.tex}
+        \subsubsection{Top2Vec}
+            \input{sections/top2vec.tex}
+        \subsubsection{BERTopic}
+            \input{sections/bertopic.tex}
+    \subsection{Fine-tune Topic Representation}
+        \input{sections/fine_tune_representation.tex}
+    \subsection{Evaluation}
+        \input{sections/topic_modeling_evaluation.tex}
+
+\section{Similar Documents Retrieval}
+    \subsection{Algorithms}
+        \subsubsection{Brute-force Algorithm}
+            \input{sections/brute_force_algorithm.tex}
+        \subsubsection{Proposed Two-phase Algorithm}
+            \input{sections/two_phase_algorithm.tex}
+    \subsection{Evaluation}
+        \input{sections/evaluation.tex}
+    \subsection{Dashboard}
+        \input{sections/dashboard.tex}
+
+\section{Conclusion}
+    \input{sections/conclusion.tex}
+
+\section{Author Contributions}
+    \input{sections/author_contributions.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

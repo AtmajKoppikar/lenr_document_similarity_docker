@@ -1,9 +1,16 @@
 from openai import OpenAI
 import pdfplumber
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Initialize OpenAI API key from environment variable
+api_key = os.getenv('OPENAI_API_KEY')
 
 client = OpenAI(
-    api_key = 'sk-H9W8WafE2ckLkPlhvTYgxq1uJbrs_rFyAmnnF5yW8lT3BlbkFJBeGg9cFeH9-JkNUFv8OUUUGISKk2kbETflv0J3ttAA'
+    api_key=api_key
 )
 # Function to extract text from a PDF using pdfplumber
 def extract_text_from_pdf(pdf_path):
