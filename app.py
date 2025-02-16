@@ -22,7 +22,7 @@ def upload_file():
     file = request.files['file']
     print('received', file.filename)
     num_similar = int(request.form.get('num_similar', 5))  # Default to 5 if not provided
-    results = workflow.get_similar_documents(filef=file, num_similar=num_similar, extracted_text = None)
+    results = workflow.get_similar_documents(file, num_similar)
     # results is a list of dictionaries with keys: doc_id, title, link_path, abstract, similarity
     # Convert the similarity_scores into percentages before passing to html. like 0.6298329487 becomes 63%
     for result in results:
