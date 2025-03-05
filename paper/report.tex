@@ -5,7 +5,7 @@
 \usepackage{hyperref}
 \usepackage{authblk}
 
-\title{Document Similarity for Low Energy Nuclear Reactions}
+\title{Exploring similarity techniques for scientific publications} %{Document Similarity for Low Energy Nuclear Reactions}
 \author[1]{Anasse Bari}
 \author[1]{Atmaj Koppikar}
 \author[1]{Tanya Pushkin Garg}
@@ -175,15 +175,10 @@ This pipeline enables efficient retrieval of similar documents while preserving 
     Future work will explore enhancements such as fine-tuning embedding models, experimenting with chunking strategies, and optimizing Milvus parameters (\texttt{nlist}, \texttt{nprobe}, and \texttt{ef}) to balance speed and accuracy effectively.
     
 \section{Similar Documents Retrieval}
-    \subsection{Our approach}
 
-    {How about this? See the image. Similar approach to the aspect based similarity paper but dealing with documents with varying structure. Each document is split into 3 groups of equal number of chunks. Each group contains the aggregate embedding of its chunks. The query document is also split into 3 groups of equal chunks and each group is compared with cosine similarity and the arithmetic mean is the final score. Can this be done with Milvus?}
+In this section, we explore two distinct approaches for computing document similarity: (1) a vector comparison method that aggregates all chunk embeddings into a single vector and compares documents as a whole, and (2) a keyword based approach using an algorithm called TF-IDF. These methods are designed to address the challenges posed by varying document structures in the LENR dataset.
 
-    \subsection{Document Similarity Approaches}
-
-In this section, we explore two distinct approaches for computing document similarity: (1) a straightforward method that aggregates all chunk embeddings into a single vector and compares documents as a whole, and (2) a grouping-based approach inspired by aspect-based similarity, which divides documents into structured groups of chunks before comparison. These methods are designed to address the challenges posed by varying document structures in the LENR dataset.
-
-\subsubsection{Straightforward Approach: Adding Vectors}
+\subsection{Vector comparison approach: Adding Vectors}
 
 The first approach involves aggregating the embeddings of all chunks within a document into a single representative vector. This is achieved by summing or averaging the embeddings of individual chunks. The resulting vector serves as a holistic representation of the document's semantic content.
 
@@ -199,44 +194,11 @@ Here, \(\mathbf{v}_i^{(D)}\) represents the embedding of the \(i\)-th chunk in d
 
 This method is computationally efficient and provides a single similarity score for each document pair. However, it assumes that all chunks contribute equally to the document's overall meaning, potentially overlooking structural nuances or localized semantic differences.
 
-\subsubsection{Grouping Approach: Aspect-Based Similarity}
-\begin{table}[h!]
-    \centering
-    \caption{Document Group Embeddings}
-    \begin{tabular}{|c|c|c|}
-        \hline
-        \textbf{docId} & \textbf{groupId} & \textbf{embedding} \\
-        \hline
-        Doc1 & Group1 & [Vector for Chunk1+Chunk2] \\
-        Doc1 & Group2 & [Vector for Chunk3+Chunk4] \\
-        Doc1 & Group3 & [Vector for Chunk5+Chunk6] \\
-        \hline
-    \end{tabular}
-\end{table}
-
-The second approach addresses the limitations of the straightforward method by introducing a grouping mechanism. Each document is divided into three groups of equal-sized chunks, with each group representing a specific portion of the document's semantic structure. For example:\\
-- Group 1: Aggregates embeddings from the first third of the document.\\
-- Group 2: Aggregates embeddings from the middle third.\\
-- Group 3: Aggregates embeddings from the final third.
-
-For each group, chunk embeddings are aggregated using an arithmetic mean:
-\[
-\mathbf{g}_j^{(D)} = \frac{1}{m} \sum_{k=1}^{m} \mathbf{v}_k^{(G_j)}
-\]
-where \(m\) is the number of chunks in group \(G_j^{(D)}\).
-
-To compute the similarity between two documents, their corresponding groups are compared using cosine similarity. The final similarity score is obtained by averaging the group-wise similarities:
-\[
-\text{Similarity}(D_1, D_2) = \frac{1}{n} \sum_{i=1}^{n} \text{Similarity}(G_i^{(D_1)}, G_i^{(D_2)})
-\]
-
-
-This approach preserves structural information within documents and allows for more granular comparisons. By dividing documents into groups, it accounts for variations in content distribution and ensures that localized similarities are not overshadowed by global trends.
 
 \subsubsection{Implementation Using Milvus}
 
 Both approaches were implemented using Milvus as the vector database. For each document:
-- Chunk embeddings were generated using OpenAI’s embedding model (\texttt{text-embedding-3-small}).
+- Chunk embeddings were generated using OpenAI’s embedding model [\texttt{text-embedding-3-small, text-embedding-3-large}].
 - In the straightforward approach, all chunk embeddings were aggregated into a single vector before being stored in Milvus.
 - In the grouping approach, each group embedding was stored as a separate entry in Milvus with metadata linking it to its parent document.
 
@@ -306,7 +268,7 @@ The lower average cosine similarity score observed in our current approach refle
 
 Future work will explore methods to improve these scores through enhanced embedding techniques (e.g., fine-tuning models) and optimized chunking strategies.
 
-    \subsection{Dashboard}
+    \section{Dashboard}
     A web-based application was developed to visualize and interact with the document similarity tool. 
     Users can input documents and retrieve the most similar research studies.
     \begin{figure}[h!]
@@ -333,3 +295,39 @@ Future work will explore methods to improve these scores through enhanced embedd
     \item Grootendorst, M. (2022). "BERTopic: Neural topic modeling with a class-based TF-IDF procedure." arXiv. doi: 10.48550/arXiv.2203.05794.
 \end{itemize}
 \end{document}
+
+
+
+% \subsubsection{Grouping Approach: Aspect-Based Similarity}
+% \begin{table}[h!]
+%     \centering
+%     \caption{Document Group Embeddings}
+%     \begin{tabular}{|c|c|c|}
+%         \hline
+%         \textbf{docId} & \textbf{groupId} & \textbf{embedding} \\
+%         \hline
+%         Doc1 & Group1 & [Vector for Chunk1+Chunk2] \\
+%         Doc1 & Group2 & [Vector for Chunk3+Chunk4] \\
+%         Doc1 & Group3 & [Vector for Chunk5+Chunk6] \\
+%         \hline
+%     \end{tabular}
+% \end{table}
+
+% The second approach addresses the limitations of the straightforward method by introducing a grouping mechanism. Each document is divided into three groups of equal-sized chunks, with each group representing a specific portion of the document's semantic structure. For example:\\
+% - Group 1: Aggregates embeddings from the first third of the document.\\
+% - Group 2: Aggregates embeddings from the middle third.\\
+% - Group 3: Aggregates embeddings from the final third.
+
+% For each group, chunk embeddings are aggregated using an arithmetic mean:
+% \[
+% \mathbf{g}_j^{(D)} = \frac{1}{m} \sum_{k=1}^{m} \mathbf{v}_k^{(G_j)}
+% \]
+% where \(m\) is the number of chunks in group \(G_j^{(D)}\).
+
+% To compute the similarity between two documents, their corresponding groups are compared using cosine similarity. The final similarity score is obtained by averaging the group-wise similarities:
+% \[
+% \text{Similarity}(D_1, D_2) = \frac{1}{n} \sum_{i=1}^{n} \text{Similarity}(G_i^{(D_1)}, G_i^{(D_2)})
+% \]
+
+
+% This approach preserves structural information within documents and allows for more granular comparisons. By dividing documents into groups, it accounts for variations in content distribution and ensures that localized similarities are not overshadowed by global trends.
