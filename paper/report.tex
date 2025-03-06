@@ -5,18 +5,19 @@
 \usepackage{hyperref}
 \usepackage{authblk}
 
-\title{Exploring similarity techniques for scientific publications} %{Document Similarity for Low Energy Nuclear Reactions}
-\author[1]{Anasse Bari}
-\author[1]{Atmaj Koppikar}
-\author[1]{Tanya Pushkin Garg}
-\author[1]{Yvonne Wu}
-\author[2]{David J. Nagel}
-\affil[1]{Courant Institute of Mathematical Sciences, New York University, New York, NY, United States}
-\affil[2]{School of Engineering and Applied Science, George Washington University, Washington, DC, United States}
-\affil[ ]{\texttt{abari@nyu.edu}}
-
-\date{February 16, 2025}
-
+\title{\textbf{Exploring Document Similarity techniques for Unstructured Scientific Publications}\\
+\large Tool deployed at \underline{\href{http://150.230.235.239:12345/}{LENR Document Similarity Tool}}}
+\author{
+  The NYU Team supervised by Prof.\ Bari\textsuperscript{1} and Prof.\ Nagel\textsuperscript{2}
+  Atmaj Koppikar\textsuperscript{1},
+  Naman Lalit\textsuperscript{1}, 
+  Suryavardan Suresh\textsuperscript{1}, 
+  Dev Pant\textsuperscript{1}\\
+  \textsuperscript{1} New York University, New York, NY 10012, USA\\
+  \textsuperscript{2} George Washington University, Washington, DC 20052, USA\\
+  \texttt{abari@nyu.edu}
+}
+\date{}
 \begin{document}
 
 \maketitle
@@ -34,8 +35,10 @@
 \textbf{Keywords}: Low Energy Nuclear Reactions (LENR), Nuclear Energy, Predictive Analytics, Artificial Intelligence, Unsupervised Learning.
 
 \section{Introduction}
-The global energy crisis, driven by population growth and climate change, demands urgent innovation in clean energy technologies. Among emerging solutions, Low Energy Nuclear Reactions (LENR) stand out for their potential to enable safe, scalable nuclear energy production at ambient temperatures. Unlike traditional nuclear fission, LENR systems exhibit minimal radiation byproducts and utilize abundant isotopes like deuterium, offering a path toward sustainable energy independence1. However, progress in this field has been hindered by the fragmented nature of LENR research—spanning 3,424 documents across 34 years in formats ranging from conference abstracts to technical reports in multiple languages.
-Prior efforts to analyze LENR literature, including our own work2, focused narrowly on abstracts using clustering algorithms like BERTopic. While effective for identifying high-level themes, this approach overlooks critical technical details embedded in full-text documents—a limitation compounded by the structural heterogeneity of LENR papers (e.g., inconsistent section headers, embedded equations, and multilingual content).
+The global energy crisis, driven by population growth and climate change, demands urgent innovation in clean energy technologies. Among emerging solutions, Low Energy Nuclear Reactions (LENR) stand out for their potential to enable safe, scalable nuclear energy production at ambient temperatures. Unlike traditional nuclear fission, LENR systems exhibit minimal radiation byproducts and utilize abundant isotopes like deuterium, offering a path toward sustainable energy independence 
+However, progress in this field has been hindered by the fragmented nature of LENR research—spanning 3,424 documents across 34 years in formats ranging from conference abstracts to technical reports in multiple languages.
+Prior efforts to analyze LENR literature \cite{FrontierAI2024}
+, focused narrowly on abstracts using clustering algorithms like BERTopic. While effective for identifying high-level themes, this approach overlooks critical technical details embedded in full-text documents—a limitation compounded by the structural heterogeneity of LENR papers (e.g., inconsistent section headers, embedded equations, and multilingual content).
 This paper introduces an AI-driven framework that overcomes these challenges through three innovations:
 Full-text semantic analysis: Leveraging OpenAI’s text-embedding-3-small embeddings to capture nuanced relationships across entire documents, not just abstracts.
 Adaptive chunking: Dividing documents into three context-preserving groups using 512-token segments with 20\% overlap, enabling localized similarity comparisons while accommodating structural variability.
@@ -47,13 +50,13 @@ Adaptive chunking: Dividing documents into three context-preserving groups using
     
     \subsection{LENR Document Similarity using abstracts}
     
-    The previous study on Low Energy Nuclear Reactions (LENR) by Bari et al. \cite{bari2024exploring} introduced a machine learning tool for identifying similar research studies. The tool relied on topic modeling techniques such as Latent Dirichlet Allocation (LDA), BERTopic, and Top2Vec to uncover latent themes in LENR abstracts. The proposed two-phase algorithm utilized BERTopic clusters to narrow down the search space before computing cosine similarity between query documents and documents within the selected cluster.
+    The previous study on Low Energy Nuclear Reactions (LENR) by Bari et al. \cite{FrontierAI2024} introduced a machine learning tool for identifying similar research studies. The tool relied on topic modeling techniques such as Latent Dirichlet Allocation (LDA), BERTopic, and Top2Vec to uncover latent themes in LENR abstracts. The proposed two-phase algorithm utilized BERTopic clusters to narrow down the search space before computing cosine similarity between query documents and documents within the selected cluster.
     
     However, the previous system was limited to analyzing only the abstracts of LENR research papers. While abstracts provide concise summaries of research, they often lack the depth and context present in full-text documents. This limitation restricted the tool's ability to capture nuanced semantic relationships across the entire corpus. In contrast, our updated system processes full-text documents, leveraging embeddings generated from all sections of a paper to provide a more comprehensive understanding of document similarity.
     
     \subsection{Aspect-Based Document Similarity}
     
-    Aspect-based document similarity extends traditional similarity measures by incorporating specific aspects of documents, such as methodology or findings \cite{ostendorff2020aspect}. For instance, Ostendorff et al. \cite{ostendorff2020aspect} proposed an aspect-based approach for research papers using Transformer models like SciBERT and RoBERTa. Their method involved pairwise classification tasks where citations were used as labels to identify specific aspects of similarity between documents.
+    Aspect-based document similarity extends traditional similarity measures by incorporating specific aspects of documents, such as methodology or findings. For instance, Ostendorff et al. \cite{Ostendorff2020} proposed an aspect-based approach for research papers using Transformer models like SciBERT and RoBERTa. Their method involved pairwise classification tasks where citations were used as labels to identify specific aspects of similarity between documents.
     
     While aspect-based approaches offer fine-grained comparisons, they rely heavily on consistent document structure and labeled data for training. In the case of LENR research papers, which vary widely in structure and content format (e.g., journal articles, conference presentations, white papers), such methods are impractical. The lack of consistent section titles or labeled aspect data makes it challenging to apply aspect-based techniques effectively in this domain.
     
@@ -61,15 +64,15 @@ Adaptive chunking: Dividing documents into three context-preserving groups using
     
     Measuring similarity between documents of varying lengths poses unique challenges due to differences in lexical density, abstraction levels, and contextual richness. Gong et al. \cite{gong2018hidden} addressed this issue by comparing texts in a common space of hidden topics using topic modeling techniques. Their approach demonstrated robust performance in aligning long documents with their concise summaries.
     
-    Similarly, Ostendorff et al. \cite{ostendorff2022specialized} proposed specialized embeddings for aspect-based similarity that scale linearly with corpus size while preserving coherence across varying document lengths. These methods highlight the importance of designing representations that bridge lexical and contextual gaps between long-form texts and shorter summaries.
+    Similarly, Ostendorff et al. \cite{Ostendorff2020} proposed specialized embeddings for aspect-based similarity that scale linearly with corpus size while preserving coherence across varying document lengths. These methods highlight the importance of designing representations that bridge lexical and contextual gaps between long-form texts and shorter summaries.
     
     In our study, we adopt a grouping-based approach inspired by these works but tailored to handle the inconsistent structure of LENR documents. By dividing each document into equal-sized groups of chunks and aggregating their embeddings, we ensure that semantic information is preserved while accommodating variations in length and format.
     
     \subsection{Limitations of Existing Approaches}
     
-    Traditional methods like cosine similarity with TF-IDF \cite{kdnuggets2025evaluating} fail to capture semantic nuances across documents with differing lengths or structures. While neural embedding models such as BERT \cite{devlin2019bert} and SciBERT \cite{beltagy2019scibert} offer improved contextual understanding, their effectiveness diminishes when applied without preprocessing strategies tailored to domain-specific challenges.
+    Traditional methods like cosine similarity combined with TF-IDF \cite{kdnuggets2025evaluating} fail to capture semantic nuances across documents with differing lengths or structures. While neural embedding models such as BERT \cite{devlin2019bert} and SciBERT \cite{beltagy2019scibert} offer improved contextual understanding, their effectiveness diminishes when applied without preprocessing strategies tailored to domain-specific challenges.
     
-    Aspect-based methods \cite{ostendorff2020aspect} provide granularity but require consistent structural features or labeled data for training. These requirements are unmet in the LENR corpus due to its diverse formats and lack of standardized sectioning.
+    Aspect-based methods provide granularity but require consistent structural features or labeled data for training. These requirements are unmet in the LENR corpus due to its diverse formats and lack of standardized sectioning.
     
     Our grouping approach addresses these limitations by:
     \begin{itemize}
@@ -120,30 +123,34 @@ This pipeline enables efficient retrieval of similar documents while preserving 
     \subsubsection{HNSW}
     The HNSW (Hierarchical Navigable Small World) indexing method constructs a multi-layered graph where each node represents a vector, and edges connect similar vectors. The search process involves traversing this graph to locate nearest neighbors efficiently. HNSW is known for its high recall but requires more memory and longer index build times compared to IVF\_FLAT.
     
-    \subsection{Coherence and Diversity Results}
+    % \begin{table}[h!]
+    %     \centering
+    %     \caption{Coherence and Diversity Comparison}
+    %     \label{tab:coherence-diversity}
+    %     \begin{tabular}{|l|c|c|}
+    %         \hline
+    %         \textbf{Method} & \textbf{Coherence Score} & \textbf{Diversity Score} \\ 
+    %         \hline
+    %         BERTopic + KMeans & 0.14 & 0.98 \\ 
+    %         IVF\_FLAT                             & 0.5578 & 0.0194 \\ 
+    %         HNSW                                  & 0.5578 & 0.0194 \\ 
+    %         TF-IDF                                & 0.8244 & 0.7757 \\
+    %         \hline
+    %     \end{tabular}
+    % \end{table}
     
-    To evaluate the semantic quality of the embeddings stored in Milvus, we computed coherence and diversity scores for both IVF\_FLAT and HNSW indexes. These metrics were compared to the results from the previous paper, which used clustering-based approaches such as BERTopic with KMeans.
+    % The coherence score for both IVF\_FLAT and HNSW was significantly higher than that of the previous approach, indicating improved semantic consistency in the embeddings. However, the diversity score was much lower, suggesting that both indexing methods focus on narrower semantic regions of the vector space compared to BERTopic.
     
-    \begin{table}[h!]
-        \centering
-        \caption{Coherence and Diversity Comparison}
-        \label{tab:coherence-diversity}
-        \begin{tabular}{|l|c|c|}
-            \hline
-            \textbf{Method} & \textbf{Coherence Score} & \textbf{Diversity Score} \\ 
-            \hline
-            BERTopic + KMeans & 0.14 & 0.98 \\ 
-            IVF\_FLAT                             & 0.5578 & 0.0194 \\ 
-            HNSW                                  & 0.5578 & 0.0194 \\ 
-            \hline
-        \end{tabular}
-    \end{table}
+    \section{Performance Results}
     
-    The coherence score for both IVF\_FLAT and HNSW was significantly higher than that of the previous approach, indicating improved semantic consistency in the embeddings. However, the diversity score was much lower, suggesting that both indexing methods focus on narrower semantic regions of the vector space compared to BERTopic.
-    
-    \subsection{Performance Results}
-    
-    To evaluate the semantic quality of the embeddings stored in Milvus, we computed coherence and diversity scores for both IVF\_FLAT and HNSW indexes. These metrics were compared to the results from the previous paper, which used clustering-based approaches such as BERTopic with KMeans, along with various embedding models.
+    To evaluate the semantic quality of the embeddings stored in Milvus, we computed coherence and diversity scores for both IVF\_FLAT and HNSW indexes. 
+    These metrics were compared to the results from the previous paper, which used clustering-based approaches such as BERTopic with KMeans, along with various embedding models.
+
+    \subsection{Coherence and Diversity Metrics}
+    Coherence metrics quantify how semantically consistent the words within each topic are, measuring whether the grouped keywords collectively convey a clear, interpretable theme. 
+    Diversity metrics, on the other hand, assess the uniqueness of topics by evaluating the ratio of distinct tokens to the total number of tokens across topics. 
+    For document similarity and topic modeling on LENR literature, these metrics are important because high coherence indicates that the topics are meaningful and well-aligned with underlying content, while adequate diversity ensures that the topics capture a broad range of themes without excessive redundancy. 
+    This balance enhances the utility of the model in accurately retrieving and differentiating between research studies.
 
     \begin{table}[h!]
         \centering
@@ -153,32 +160,37 @@ This pipeline enables efficient retrieval of similar documents while preserving 
             \hline
             \textbf{Method} & \textbf{Coherence Score} & \textbf{Diversity Score} \\ 
             \hline
-            LDA  & 0.06 & 0.66 \\ 
-            Top2Vec: Doc2Vec  & -0.015 & 0.99 \\ 
-            BERTopic: Word2Vec  & -0.01 & 0.92 \\ 
-            BERTopic: all-MiniLM-L6-v2  & -0.05 & 0.98 \\ 
-            BERTopic: e5-base-v2  & 0.14 & 0.98 \\ 
-            \textbf{IVF\_FLAT}  & 0.5578 & 0.0194 \\ 
-            \textbf{HNSW}  & 0.5578 & 0.0194 \\ 
+            LDA                             & 0.06 & 0.66 \\ 
+            Top2Vec: Doc2Vec                & -0.015 & 0.99 \\ 
+            BERTopic: Word2Vec              & -0.01 & 0.92 \\ 
+            BERTopic: all-MiniLM-L6-v2      & -0.05 & 0.98 \\ 
+            BERTopic: e5-base-v2            & 0.14 & 0.98 \\ 
+            \textbf{Milvus with}            & & \\
+            \textbf{IVF\_FLAT/HNSW}         & 0.5578 & 0.0194 \\
+            % \textbf{HNSW}                   & 0.5578 & 0.0194 \\ 
+            \textbf{TF-IDF}                 & 0.8244 & 0.7757 \\
             \hline
         \end{tabular}
     \end{table}
     
-    The coherence score for both IVF\_FLAT and HNSW was significantly higher than that of the previous approaches, indicating improved semantic consistency in the embeddings. However, the diversity score was much lower, suggesting that both indexing methods focus on narrower semantic regions of the vector space compared to BERTopic.
-
     \subsection{Discussion}
-    The results highlight a trade-off between speed and accuracy when using Milvus indexing methods compared to clustering-based approaches like BERTopic:\\
-    - Speed: Both IVF\_FLAT and HNSW significantly reduced query runtime to less than half a millisecond per query on average.\\
-    - Accuracy: The cosine similarity scores for both methods were relatively low (0.2315), suggesting that further optimization of embeddings or chunking strategies is necessary.\\
-    - Semantic Quality: While coherence scores improved with Milvus indexing, diversity scores dropped considerably due to narrowed semantic focus.
+    As we can see the Milvus embedding model is the most effective approach for retrieving semantically similar documents. While TF-IDF does yield a higher coherence score (indicating that its top-ranked documents are often closely related to the query), it also exhibits a relatively high diversity score. In practical terms, this means that while TF-IDF consistently finds “on-topic” documents, it can also retrieve results that diverge from each other's content, potentially covering a wider range of subtopics or tangential information. This can be useful in some exploratory contexts, but for a specialized field like LENR—where the focus is on a specific scientific niche—high diversity may introduce unnecessary noise.
+
+On the other hand, Milvus embeddings offer a strong balance between semantic relevance and consistency. Although its coherence score is somewhat lower than TF-IDF's, it is still significantly higher than that of earlier models like LDA, Doc2Vec, or certain BERTTopic variants. Moreover, Milvus embeddings have a markedly lower diversity score, indicating that the returned documents form a tightly knit, semantically aligned set. In the specialized LENR domain, this “tight clustering” of related documents is ideal: researchers benefit from seeing a narrower, more focused subset of articles or reports that directly relate to the query, rather than an assortment of vaguely connected materials. Consequently, Milvus embeddings excel at delivering highly relevant and thematically consistent results, making it the more suitable choice for LENR similarity tasks.
+
+    % The results highlight a trade-off between speed and accuracy when using Milvus indexing methods compared to clustering-based approaches like BERTopic:\\
+    % - Speed: Both IVF\_FLAT and HNSW significantly reduced query runtime to less than half a millisecond per query on average.\\
+    % - Accuracy: The cosine similarity scores for both methods were relatively low (0.2315), suggesting that further optimization of embeddings or chunking strategies is necessary.\\
+    % - Semantic Quality: While coherence scores improved with Milvus indexing, diversity scores dropped considerably due to narrowed semantic focus.
     
-    Future work will explore enhancements such as fine-tuning embedding models, experimenting with chunking strategies, and optimizing Milvus parameters (\texttt{nlist}, \texttt{nprobe}, and \texttt{ef}) to balance speed and accuracy effectively.
+    % Future work will explore enhancements such as fine-tuning embedding models, experimenting with chunking strategies, and optimizing Milvus parameters (\texttt{nlist}, \texttt{nprobe}, and \texttt{ef}) to balance speed and accuracy effectively.
     
 \section{Similar Documents Retrieval}
 
-In this section, we explore two distinct approaches for computing document similarity: (1) a vector comparison method that aggregates all chunk embeddings into a single vector and compares documents as a whole, and (2) a keyword based approach using an algorithm called TF-IDF. These methods are designed to address the challenges posed by varying document structures in the LENR dataset.
+In this section, we explore two distinct approaches for computing document similarity: (1) a vector comparison method that aggregates all chunk embeddings into a single vector and compares documents as a whole, and (2) a keyword based approach using an algorithm called TF-IDF. 
+TF-IDF,short for Term Frequency-Inverse Document Frequency, transforms each document into a numerical vector based on the frequency of its terms, adjusted by how common the term is across the entire corpus These methods are designed to address the challenges posed by varying document structures in the LENR dataset.
 
-\subsection{Vector comparison approach: Adding Vectors}
+\subsection{Vector based approach: Linear combinations of vectors}
 
 The first approach involves aggregating the embeddings of all chunks within a document into a single representative vector. This is achieved by summing or averaging the embeddings of individual chunks. The resulting vector serves as a holistic representation of the document's semantic content.
 
@@ -197,16 +209,47 @@ This method is computationally efficient and provides a single similarity score 
 
 \subsubsection{Implementation Using Milvus}
 
-Both approaches were implemented using Milvus as the vector database. For each document:
-- Chunk embeddings were generated using OpenAI’s embedding model [\texttt{text-embedding-3-small, text-embedding-3-large}].
-- In the straightforward approach, all chunk embeddings were aggregated into a single vector before being stored in Milvus.
-- In the grouping approach, each group embedding was stored as a separate entry in Milvus with metadata linking it to its parent document.
+Both approaches were implemented using Milvus as the vector database. For each document, Chunk embeddings were generated using OpenAI's embedding model [\texttt{text-embedding-3-small, text-embedding-3-large}]. Then all chunk embeddings were aggregated into a single vector before being stored in Milvus.
+% - In the grouping approach, each group embedding was stored as a separate entry in Milvus with metadata linking it to its parent document.
 
-During retrieval:
-- For the straightforward approach, query documents were processed similarly to produce a single vector for comparison.
-- For the grouping approach, query documents were divided into three groups, and their embeddings were compared against stored group embeddings in Milvus. The arithmetic mean of group-wise similarities was computed to obtain the final score.
+During retrieval, for the vector based approach, query documents were processed similarly to produce a single vector for comparison.
+% - For the grouping approach, query documents were divided into three groups, and their embeddings were compared against stored group embeddings in Milvus. The arithmetic mean of group-wise similarities was computed to obtain the final score.
 
 This implementation leverages Milvus's efficient vector search capabilities while allowing flexibility in handling varying document structures.
+
+\subsection{Keyword-based approach: TF-IDF}
+
+First we load the corpus of document paragraphs and vectorize each using TF-IDF, which converts text into numerical vectors reflecting term importance.
+It then computes cosine similarities between these vectors so that for each document, the top three most similar ones (excluding itself) are identified based on shared distinctive vocabulary. 
+
+Next, the program extracts top keywords from the retrieved documents, and uses these as proxy topics to calculate two key metrics: \\
+coherence, using Gensims c\_v measure that evaluates the semantic consistency among the keywords, and diversity, which is computed as the ratio of unique tokens to total tokens in the extracted keywords.
+
+\[
+\text{TF-IDF}(t, d, D) = \text{tf}(t, d) \times \log\!\left(\frac{|D|}{\text{df}(t, D)}\right)
+\]
+\textbf{Where:}
+\begin{itemize}
+  \item $t$ is a term (word),
+  \item $d$ is a document,
+  \item $D$ is the entire corpus of documents,
+  \item $\text{tf}(t,d)$ is the frequency of term $t$ in document $d$,
+  \item $\text{df}(t,D)$ is the number of documents in which $t$ appears,
+  \item $|D|$ is the total number of documents in the corpus.
+\end{itemize}
+
+\subsubsection{TF-IDF Implementation}
+
+The TF-IDF approach was implemented using the scikit-learn library in Python. The following steps outline the process:
+
+\begin{enumerate}
+    \item \textbf{Vectorization}: Each document is converted into a TF-IDF vector, reflecting how often each term appears within the document relative to its frequency across the corpus.
+    \item \textbf{Similarity Computation}: We then calculate the cosine similarity between the TF-IDF vector of the query document and those of all other documents in the corpus.
+    \item \textbf{Top-N Retrieval}: Based on the similarity scores, we retrieve the top three documents most closely matching the query document.
+    \item \textbf{Keyword Extraction}: From these top-ranked documents, we extract key terms to further summarize or characterize the retrieved content.
+    \item \textbf{Coherence and Diversity Calculation}: Finally, we compute coherence and diversity scores for the extracted keywords to ensure they provide a well-rounded representation of each document’s core themes.
+\end{enumerate}
+
 
 \subsection{Evaluation}
 
@@ -222,7 +265,7 @@ While this approach provides a focused evaluation of similarity for specific que
     \item The limited sample size (10 queries) may not fully represent the performance of the algorithm across the entire dataset.
 \end{itemize}
 
-\subsubsection{Current Approach}
+\subsubsection{Vector based approach}
 
 In this study, we adopt a more comprehensive method for calculating the average cosine similarity score. Instead of restricting the evaluation to a small set of query documents, we calculate the score by averaging over all documents in the dataset. This ensures that every document contributes to the final evaluation metric, providing a more holistic assessment of algorithm performance.
 
@@ -260,24 +303,20 @@ The results indicate that while the previous approach yielded higher average cos
 
 \subsubsection{Implications of Results}
 
-The lower average cosine similarity score observed in our current approach reflects:
-\begin{itemize}
-    \item The challenges posed by using embeddings generated from diverse and complex LENR documents.
-    \item The broader scope of evaluation, which includes queries that may not have closely related documents in the dataset.
-\end{itemize}
+The previous evaluation used a small set of handpicked queries, resulting in high average cosine similarity scores (e.g., 0.8925) because these queries naturally had close neighbors. In contrast, our current approach uses every document as a query, which lowers the overall average similarity (e.g., to 0.2315) as it includes niche or outlier topics.
 
-Future work will explore methods to improve these scores through enhanced embedding techniques (e.g., fine-tuning models) and optimized chunking strategies.
+This comprehensive evaluation better reflects real-world usage where query documents vary widely. While the overall average similarity decreases, the top-ranked results still offer a focused set of semantically consistent matches—essential for specialized fields like LENR. Moreover, the broader approach highlights areas for improvement, such as fine-tuning embeddings or adopting adaptive chunking strategies, ultimately balancing recall and precision.
 
-    \section{Dashboard}
+\section{Dashboard}
     A web-based application was developed to visualize and interact with the document similarity tool. 
     Users can input documents and retrieve the most similar research studies.
+
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.8\textwidth]{images/query.png}
         \caption{The Document similarity tool}
         \label{fig:Screenshot of the document similarity tool}
     \end{figure}
-
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.8\textwidth]{images/result.png}
@@ -285,16 +324,38 @@ Future work will explore methods to improve these scores through enhanced embedd
         \label{fig:Screenshot of the results page}
     \end{figure}
 
+
 \section{Conclusion}
     This study demonstrates the potential of AI techniques, particularly topic modeling and document similarity algorithms, to advance research in LENR. The results will help researchers navigate and synthesize the vast body of LENR literature, fostering new discoveries and accelerating innovation in the field.
 
-\section{References}
-\begin{itemize}
-    \item Fan, L., Li, L., et al. (2023). "A bibliometric review of large language models research from 2017 to 2023." arXiv. doi: 10.48550/arXiv.2304.02020.
-    \item Blei, D. M., Ng, A. Y., and Jordan, M. I. (2003). "Latent Dirichlet Allocation." J. Mach. Learn. Res. 3, 993–1022.
-    \item Grootendorst, M. (2022). "BERTopic: Neural topic modeling with a class-based TF-IDF procedure." arXiv. doi: 10.48550/arXiv.2203.05794.
-\end{itemize}
+\begin{thebibliography}{9}
+    
+    \bibitem{FrontierAI2024} 
+    Bari A, Garg TP, Wu Y, Singh S \& Nagel D (2024). “Title of the Frontier AI Paper.” Frontiers in Artificial Intelligence. doi: 10.3389/frai.2024.1401782.
+
+    \bibitem{Fan2023} 
+    Fan, L., Li, L., et al. (2023). “A bibliometric review of large language models research from 2017 to 2023.” arXiv. doi: 10.48550/arXiv.2304.02020.
+    
+    \bibitem{Blei2003} 
+    Blei, D. M., Ng, A. Y., and Jordan, M. I. (2003). “Latent Dirichlet Allocation.” J. Mach. Learn. Res. 3, 993–1022.
+    
+    \bibitem{Grootendorst2022} 
+    Grootendorst, M. (2022). “BERTopic: Neural topic modeling with a class-based TF-IDF procedure.” arXiv. doi: 10.48550/arXiv.2203.05794.
+
+    \bibitem{Ostendorff2020}
+    Ostendorff, M., Ruas, T., Gipp, B., \& Rehm, G. (2020). Aspect-based Document Similarity for Research Papers. CoRR, abs/2010.06395.
+    
+\end{thebibliography}
 \end{document}
+        
+
+% \section{References}
+% \begin{itemize}
+%     \item Fan, L., Li, L., et al. (2023). "A bibliometric review of large language models research from 2017 to 2023." arXiv. doi: 10.48550/arXiv.2304.02020.
+%     \item Blei, D. M., Ng, A. Y., and Jordan, M. I. (2003). "Latent Dirichlet Allocation." J. Mach. Learn. Res. 3, 993–1022.
+%     \item Grootendorst, M. (2022). "BERTopic: Neural topic modeling with a class-based TF-IDF procedure." arXiv. doi: 10.48550/arXiv.2203.05794.
+% \end{itemize}
+% \end{document}
 
 
 
