@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Similar Documents</h1>
+        <h1 class="mb-4">Similarity Results</h1>
         
-        <button class="btn btn-primary mb-4" onclick="window.history.back()">Upload new document</button>
+        <button class="btn btn-primary mb-4" onclick="window.history.back()">Upload file</button>
         
         {% if common_results %}
             <ul class="list-group">
@@ -34,7 +34,7 @@
             </ul>
         {% else %}
             <div class="alert alert-warning" role="alert">
-                No common documents found between the two models.
+                No common documents found .
             </div>
         {% endif %}
     </div>
